@@ -83,12 +83,6 @@ CREATE TABLE IF NOT EXISTS bank.transaction_type
 	name VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS bank.failed_transaction_error_type
-(
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(30) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS bank.transaction_mode
 (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -112,18 +106,6 @@ CREATE TABLE IF NOT EXISTS bank.transactions
 	CONSTRAINT FK_transaction_mode_id FOREIGN KEY (transactionModeId) REFERENCES bank.transaction_mode(id)
 )AUTO_INCREMENT = 10001;
 
-CREATE TABLE IF NOT EXISTS bank.failed_transactions
-(
-	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	customerId INT NOT NULL,
-	failedtransactionTypeId INT NOT NULL,
-	transactionModeId INT NOT NULL,
-	amount DECIMAL(10,2) NOT NULL,
-	transactionDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT FK_failed_transaction_customer_id FOREIGN KEY (customerId) REFERENCES bank.customer(id),
-	CONSTRAINT FK_failed_transaction_type_id FOREIGN KEY (failedtransactionTypeId) REFERENCES bank.failed_transaction_error_type(id)
-)AUTO_INCREMENT = 10001;
-
 CREATE TABLE IF NOT EXISTS bank.transaction_reference
 (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -139,6 +121,24 @@ CREATE TABLE bank.login_details
 	isEmployee tinyint(1) NOT NULL DEFAULT '1',
 	status tinyint(1) NOT NULL DEFAULT '1'
 );
+
+CREATE TABLE IF NOT EXISTS bank.failed_transaction_error_type
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bank.failed_transactions
+(
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	customerId INT NOT NULL,
+	failedtransactionTypeId INT NOT NULL,
+	transactionModeId INT NOT NULL,
+	amount DECIMAL(10,2) NOT NULL,
+	transactionDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+	CONSTRAINT FK_failed_transaction_customer_id FOREIGN KEY (customerId) REFERENCES bank.customer(id),
+	CONSTRAINT FK_failed_transaction_type_id FOREIGN KEY (failedtransactionTypeId) REFERENCES bank.failed_transaction_error_type(id)
+)AUTO_INCREMENT = 10001;
 
 CREATE TABLE IF NOT EXISTS bank.login_error_log
 (
