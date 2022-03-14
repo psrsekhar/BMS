@@ -32,5 +32,22 @@
                 }
             });
         return responseData;
-    }
+    },
+
+    showPage: function (path, targetDiv)
+    {
+        var jqxhr = jQuery.get(path, function (data) {
+            jQuery("#" + targetDiv).html(data);
+        });        
+    },
+
+    showLogin: function()
+    {
+        Request.showPage("/html/login.html", "main");
+    },
+
+    showHome: function()
+    {
+        Request.showPage("/html/home.html", "main");
+    }    
 };
