@@ -145,5 +145,5 @@ CREATE TABLE IF NOT EXISTS bank.login_error_log
 	userId INT NOT NULL,
 	loginDate DATETIME DEFAULT CURRENT_TIMESTAMP,
 	description text,
-	CONSTRAINT FK_login_error_user_id FOREIGN KEY (userId) REFERENCES bank.login_details(id)
+	CONSTRAINT FK_login_error_user_id FOREIGN KEY (userId) REFERENCES bank.login_details(userId)
 );
