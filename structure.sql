@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS bank.customer
 	address text NOT NULL,
 	resTelNumber INT NOT NULL,
 	mobileNumber INT NOT NULL
-)AUTO_INCREMENT = 1001;
+)AUTO_INCREMENT = 10001;
 
 CREATE TABLE IF NOT EXISTS bank.customer_signature
 (
@@ -113,15 +113,6 @@ CREATE TABLE IF NOT EXISTS bank.transaction_reference
 	CONSTRAINT FK_transaction_id FOREIGN KEY (transactionId) REFERENCES bank.transactions(id)
 )AUTO_INCREMENT = 10001;
 
-CREATE TABLE bank.login_details
-(
-	userLoginID INT NOT NULL,
-	userId INT NOT NULL,	
-	password varchar(200) NOT NULL,
-	isEmployee tinyint(1) NOT NULL DEFAULT '1',
-	status tinyint(1) NOT NULL DEFAULT '1'
-);
-
 CREATE TABLE IF NOT EXISTS bank.failed_transaction_error_type
 (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -140,10 +131,18 @@ CREATE TABLE IF NOT EXISTS bank.failed_transactions
 	CONSTRAINT FK_failed_transaction_type_id FOREIGN KEY (failedtransactionTypeId) REFERENCES bank.failed_transaction_error_type(id)
 )AUTO_INCREMENT = 10001;
 
+CREATE TABLE IF NOT EXISTS bank.login_details
+(
+	userLoginID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	userId INT NOT NULL,	
+	password varchar(200) NOT NULL,
+	isEmployee tinyint(1) NOT NULL DEFAULT '0',
+	status tinyint(1) NOT NULL DEFAULT '1'
+)AUTO_INCREMENT = 420081;
+
 CREATE TABLE IF NOT EXISTS bank.login_error_log
 (
 	userId INT NOT NULL,
 	loginDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-	description text,
-	CONSTRAINT FK_login_error_customer_id FOREIGN KEY (userId) REFERENCES bank.customer(id)
+	description text	
 );
