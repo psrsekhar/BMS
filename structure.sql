@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS bank.failed_transactions
 CREATE TABLE IF NOT EXISTS bank.login_details
 (
 	userLoginID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	userId INT NOT NULL,	
+	userId INT NOT NULL UNIQUE,	
 	password varchar(200) NOT NULL,
 	isEmployee tinyint(1) NOT NULL DEFAULT '0',
 	status tinyint(1) NOT NULL DEFAULT '1'
@@ -144,5 +144,6 @@ CREATE TABLE IF NOT EXISTS bank.login_error_log
 (
 	userId INT NOT NULL,
 	loginDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-	description text	
+	description text,
+	CONSTRAINT FK_login_error_user_id FOREIGN KEY (userId) REFERENCES bank.login_details(id)
 );
