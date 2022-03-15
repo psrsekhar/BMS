@@ -1,5 +1,11 @@
 USE bank;
 
+INSERT INTO bank.account_type (name) values('Savings');
+INSERT INTO bank.account_type (name) values('Fixed Deposit');
+INSERT INTO bank.account_type (name) values('Recurring Deposit');
+INSERT INTO bank.account_type (name) values('Gold Loan');
+INSERT INTO bank.account_type (name) values('Home Loan');
+
 INSERT INTO bank.account_status_type (name) values('Active');
 INSERT INTO bank.account_status_type (name) values('Passive');
 INSERT INTO bank.account_status_type (name) values('Closed');
